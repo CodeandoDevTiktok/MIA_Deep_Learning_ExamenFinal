@@ -1,0 +1,139 @@
+# =============================================================================
+# Configuración del Proyecto de Predicción de Deforestación
+# =============================================================================
+# MIA-203 Redes Neuronales y Aprendizaje Profundo
+# Universidad Nacional de Ingeniería
+# =============================================================================
+
+# Semilla para reproducibilidad
+seed: 42
+
+# Directorio de salida
+output_dir: "outputs"
+
+# =============================================================================
+# Configuración del Modelo
+# =============================================================================
+model:
+  # Opciones: 'unet', 'convlstm', 'st_attention'
+  name: "st_attention"
+
+  # Canales de entrada (bandas espectrales)
+  # Típicamente: Blue, Green, Red, NIR, SWIR1, SWIR2
+  in_channels: 6
+
+  # Clases de salida
+  # 0: No deforestación, 1: Deforestación
+  out_channels: 2
+
+  # Parámetros específicos del modelo
+  params:
+    # Para st_attention
+    encoder_features: [64, 128, 256, 512]
+    hidden_dim: 256
+    num_heads: 8
+    dropout: 0.1
+
+# =============================================================================
+# Configuración de Datos
+# =============================================================================
+data:
+  # Usar datos sintéticos para pruebas (True) o datos reales (False)
+  synthetic: true
+
+  # Configuración para datos sintéticos
+  num_train: 800
+  num_val: 100
+  num_test: 100
+  image_size: 128
+  num_channels: 6
+
+  # Configuración para datos reales
+  # root_dir: "data/processed"
+  # train_regions: ["ucayali_train", "loreto_train"]
+  # val_regions: ["ucayali_val"]
+  # test_regions: ["madre_de_dios_test"]
+
+  # Parámetros comunes
+  sequence_length: 5
+  patch_size: 256
+  batch_size: 8
+  num_workers: 4
+
+# =============================================================================
+# Configuración de Entrenamiento
+# =============================================================================
+training:
+  # Número de épocas
+  epochs: 100
+
+  # Optimizador: 'adam', 'adamw', 'sgd'
+  optimizer: "adamw"
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+
+  # Scheduler: 'cosine', 'plateau', null
+  scheduler: "cosine"
+  min_lr: 0.000001
+
+  # Función de pérdida: 'cross_entropy', 'focal', 'dice', 'combined'
+  loss: "combined"
+
+  # Early stopping
+  early_stopping_patience: 15
+  early_stopping_delta: 0.0001
+
+  # Mixed precision (AMP)
+  use_amp: true
+
+  # Gradient clipping
+  gradient_clip: 1.0
+
+# =============================================================================
+# Configuración de Evaluación
+# =============================================================================
+evaluation:
+  # Métricas a calcular
+  metrics:
+    - iou
+    - f1
+    - precision
+    - recall
+    - accuracy
+
+  # Guardar predicciones
+  save_predictions: true
+
+  # Generar visualizaciones
+  generate_visualizations: true
+
+# =============================================================================
+# Configuración de Interpretabilidad
+# =============================================================================
+interpretability:
+  # Métodos a usar
+  methods:
+    - grad_cam
+    - attention_maps
+    - error_analysis
+    - latent_space
+
+  # Número de ejemplos a visualizar
+  num_examples: 10
+
+# =============================================================================
+# Configuración de Logging
+# =============================================================================
+logging:
+  # Usar TensorBoard
+  tensorboard: true
+
+  # Usar Weights & Biases (opcional)
+  wandb: false
+  wandb_project: "deforestation-prediction"
+
+  # Frecuencia de logging (batches)
+  log_frequency: 50
+
+  # Guardar checkpoints cada N épocas
+  checkpoint_frequency: 5

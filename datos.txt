@@ -1,0 +1,7 @@
+PROYECTO 	ANN_DL	I1	I2	I3	I4	I5
+TÍTULO FORMULADO	"Predicción espacio-temporal de la deforestación en la Amazonía peruana.
+Predicción espacio-temporal de la deforestación en la Amazonía peruana mediante redes neuronales convolucionales y mecanismos de atención sobre series históricas satelitales."					
+OBJETIVO	Predicción espacio-temporal de la deforestación en la Amazonía peruana					
+DATA SET	https://geobosques.minam.gob.pe/geobosque/view/servicios.php?utm_source=chatgpt.com					
+	https://peru.mapbiomas.org/descargas/mapas-de-las-colecciones/?utm_source=chatgpt.com					
+	MapBiomas Perú

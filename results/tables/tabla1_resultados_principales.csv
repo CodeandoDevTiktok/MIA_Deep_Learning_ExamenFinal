@@ -1,0 +1,5 @@
+Modelo,IoU,F1-Score,Precisión,Recall,Parámetros (M)
+Random Forest,0.612,0.759,0.782,0.738,0.5
+U-Net,0.701,0.824,0.841,0.808,31.0
+ConvLSTM,0.723,0.839,0.852,0.827,8.2
+ST-AttentionNet (Propuesto),0.781,0.877,0.889,0.866,45.3

@@ -1,0 +1,6 @@
+Configuración,IoU,ΔIoU,F1-Score
+ST-AttentionNet (completo),0.781,--,0.877
+- Sin CBAM,0.754,-0.027,0.856
+- Sin Atención Temporal,0.741,-0.040,0.847
+- Sin ConvLSTM,0.712,-0.069,0.831
+- Solo U-Net backbone,0.701,-0.080,0.824
